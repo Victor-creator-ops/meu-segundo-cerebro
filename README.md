@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+# Meu Segundo Cérebro 🧠
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Status do Projeto](https://img.shields.io/badge/status-ativo-brightgreen)
 
-## Available Scripts
+"Meu Segundo Cérebro" é uma aplicação web construída com React e Firebase, projetada para ser um sistema de gerenciamento de conhecimento pessoal. Ele permite que os usuários capturem, conectem e cultivem suas ideias, transformando anotações dispersas em uma poderosa base de conhecimento interligada, no estilo de uma wiki pessoal.
 
-In the project directory, you can run:
+## ✨ Funcionalidades Principais
 
-### `npm start`
+- **Wiki Pessoal**: Crie e edite artigos que se interligam, formando uma rede de conhecimento.
+- **Notas Rápidas**: Um espaço para capturar ideias e pensamentos que podem ou não se tornar artigos completos.
+- **Conexões Automáticas**: A aplicação identifica automaticamente menções a outros artigos dentro de suas notas, ajudando a visualizar conexões.
+- **Autenticação Segura**: Gerenciamento de usuários via Firebase Authentication.
+- **Persistência de Dados em Tempo Real**: Todas as suas notas e artigos são salvos instantaneamente no Firestore.
+- **Tema Claro e Escuro**: Adapte a interface para sua preferência visual.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Tecnologias Utilizadas
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **React**: Biblioteca principal para a construção da interface de usuário.
+- **Firebase**: Backend completo, incluindo Autenticação e banco de dados NoSQL (Firestore).
+- **Tailwind CSS**: Framework de CSS para estilização rápida e responsiva.
+- **React Quill**: Editor de texto rico (WYSIWYG) para a criação de artigos e notas.
 
-### `npm test`
+## 🛠️ Guia de Instalação e Execução Local
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Siga estes passos para configurar e executar o projeto em um novo ambiente de desenvolvimento.
 
-### `npm run build`
+### 1. Pré-requisitos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Node.js**: É essencial ter o Node.js instalado. Recomenda-se a versão LTS. Baixe em [nodejs.org](https://nodejs.org/).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Configuração Crítica do Firebase
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A aplicação não funcionará sem uma configuração correta do Firebase.
 
-### `npm run eject`
+1.  **Crie um Projeto no Firebase**: Acesse o [console do Firebase](https://console.firebase.google.com/) e crie um novo projeto.
+2.  **Crie um Aplicativo Web**: Dentro do projeto, clique no ícone `</>` para adicionar um aplicativo da web. Ao final, copie o objeto de configuração `firebaseConfig`.
+3.  **Habilite a Autenticação**: No menu lateral, vá para **Authentication** -> **Sign-in method** e habilite o provedor **"E-mail/senha"**.
+4.  **Crie um Usuário**: Na aba **Users** da mesma seção, adicione um usuário com um e-mail e senha que você usará para fazer login.
+5.  **Cole a Configuração no Código**: No arquivo `src/App.js`, encontre a constante `firebaseConfig` e substitua seu valor pelo objeto que você copiou do painel.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 3. Instalação (Windows com PowerShell)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+É fortemente recomendado executar estes comandos em um terminal **PowerShell aberto como Administrador**.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1.  **Permitir Execução de Scripts**:
+    Este passo é necessário apenas uma vez por máquina para permitir que o `npm` funcione corretamente.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    ```powershell
+    Set-ExecutionPolicy RemoteSigned
+    ```
 
-## Learn More
+    Quando solicitado, digite `S` e pressione `Enter`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2.  **Navegue até a Pasta do Projeto**:
+    Use o comando `cd` para entrar no diretório onde você salvou os arquivos.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ```powershell
+    cd "C:\caminho\para\seu\projeto"
+    ```
 
-### Code Splitting
+3.  **Instale as Dependências**:
+    Este comando instala todos os pacotes necessários. A flag `--legacy-peer-deps` é **obrigatória** para resolver um conflito de versão entre as bibliotecas do projeto.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    ```powershell
+    npm install --legacy-peer-deps
+    ```
 
-### Analyzing the Bundle Size
+4.  **Configure o Tailwind CSS**:
+    Crie os arquivos de configuração do Tailwind:
+    ```powershell
+    npx tailwindcss init -p
+    ```
+    - **Abra `tailwind.config.js`** e substitua o conteúdo por:
+      ```javascript
+      /** @type {import('tailwindcss').Config} */
+      module.exports = {
+        content: ["./src/**/*.{js,jsx,ts,tsx}"],
+        theme: { extend: {} },
+        plugins: [],
+      };
+      ```
+    - **Abra `src/index.css`**, apague tudo e adicione:
+      ```css
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+      ```
+    - **Abra `src/index.js`** e garanta que `import './index.css';` esteja no topo.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 4. Executando o Projeto
 
-### Making a Progressive Web App
+Após a instalação, inicie o servidor de desenvolvimento:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm start
+```
 
-### Advanced Configuration
+A aplicação será aberta em `http://localhost:3000`. Use as credenciais do Firebase que você criou para fazer login.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📦 Deploy
 
-### Deployment
+Para publicar sua aplicação, siga estes passos:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1.  **Gere a Build de Produção**:
+    ```bash
+    npm run build
+    ```
+2.  **Publique a Pasta `build`**:
+    A maneira mais fácil é usar um serviço de hospedagem para sites estáticos como [Vercel](https://vercel.com/) ou [Netlify](https://www.netlify.com/). Basta criar uma conta gratuita e arrastar a pasta `build` inteira para a interface deles.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Feito com ❤️ por [Seu Nome/Apelido]
